@@ -24,12 +24,12 @@ const LoadMoreButton = styled.button`
   }
 `;
 
-function Button({ onClick }) {
+const Button = React.memo(function Button({ onClick }) {
   return (
     <LoadMoreButton type="button" onClick={onClick}>
       Load more
     </LoadMoreButton>
   );
-}
+});
 
 export default Button; 

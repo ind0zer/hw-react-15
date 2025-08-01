@@ -15,7 +15,7 @@ const Gallery = styled.ul`
   margin-right: auto;
 `;
 
-function ImageGallery({ images, onImageClick }) {
+const ImageGallery = React.memo(function ImageGallery({ images, onImageClick }) {
   return (
     <Gallery>
       {images.map(image => (
@@ -29,6 +29,6 @@ function ImageGallery({ images, onImageClick }) {
       ))}
     </Gallery>
   );
-}
+});
 
 export default ImageGallery; 

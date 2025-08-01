@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 
 const SearchbarHeader = styled.header`
@@ -73,17 +73,19 @@ const Input = styled.input`
   }
 `;
 
-function Searchbar({ onSubmit }) {
+const Searchbar = React.memo(function Searchbar({ onSubmit }) {
   const [input, setInput] = useState('');
 
-  const handleChange = e => setInput(e.target.value);
+  const handleChange = useCallback((e) => {
+    setInput(e.target.value);
+  }, []);
 
-  const handleSubmit = e => {
+  const handleSubmit = useCallback((e) => {
     e.preventDefault();
     if (input.trim() === '') return;
     onSubmit(input.trim());
     setInput('');
-  };
+  }, [input, onSubmit]);
 
   return (
     <SearchbarHeader>
@@ -102,6 +104,6 @@ function Searchbar({ onSubmit }) {
       </Form>
     </SearchbarHeader>
   );
-}
+});
 
 export default Searchbar; 

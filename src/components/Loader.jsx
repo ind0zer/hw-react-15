@@ -28,12 +28,12 @@ const Spinner = styled.div`
   animation: ${spin} 1s linear infinite;
 `;
 
-function Loader() {
+const Loader = React.memo(function Loader() {
   return (
     <Overlay>
       <Spinner />
     </Overlay>
   );
-}
+});
 
 export default Loader; 

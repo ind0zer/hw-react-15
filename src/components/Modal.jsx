@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 
 const Overlay = styled.div`
@@ -29,18 +29,19 @@ const ModalImg = styled.img`
   max-height: 90vh;
 `;
 
-function Modal({ image, onClose }) {
-  useEffect(() => {
-    const handleEsc = e => {
-      if (e.code === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
+const Modal = React.memo(function Modal({ image, onClose }) {
+  const handleEsc = useCallback((e) => {
+    if (e.code === 'Escape') onClose();
   }, [onClose]);
 
-  const handleOverlayClick = e => {
+  useEffect(() => {
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [handleEsc]);
+
+  const handleOverlayClick = useCallback((e) => {
     if (e.target === e.currentTarget) onClose();
-  };
+  }, [onClose]);
 
   return (
     <Overlay onClick={handleOverlayClick}>
@@ -49,6 +50,6 @@ function Modal({ image, onClose }) {
       </ModalBox>
     </Overlay>
   );
-}
+});
 
 export default Modal; 

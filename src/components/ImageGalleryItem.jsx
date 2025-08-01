@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
 const GalleryItem = styled.li`
@@ -21,12 +21,16 @@ const GalleryImg = styled.img`
   display: block;
 `;
 
-function ImageGalleryItem({ webformatURL, largeImageURL, tags, onClick }) {
+const ImageGalleryItem = React.memo(function ImageGalleryItem({ webformatURL, largeImageURL, tags, onClick }) {
+  const handleClick = useCallback(() => {
+    onClick(largeImageURL);
+  }, [largeImageURL, onClick]);
+
   return (
-    <GalleryItem onClick={() => onClick(largeImageURL)}>
+    <GalleryItem onClick={handleClick}>
       <GalleryImg src={webformatURL} alt={tags} />
     </GalleryItem>
   );
-}
+});
 
 export default ImageGalleryItem; 
