@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Overlay = styled.div`
@@ -29,26 +29,32 @@ const ModalImg = styled.img`
   max-height: 90vh;
 `;
 
-function Modal({ image, onClose }) {
-  useEffect(() => {
-    const handleEsc = e => {
-      if (e.code === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
-  }, [onClose]);
+class Modal extends Component {
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleEsc);
+  }
 
-  const handleOverlayClick = e => {
-    if (e.target === e.currentTarget) onClose();
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleEsc);
+  }
+
+  handleEsc = e => {
+    if (e.code === 'Escape') this.props.onClose();
   };
 
-  return (
-    <Overlay onClick={handleOverlayClick}>
-      <ModalBox>
-        <ModalImg src={image} alt="Large preview" />
-      </ModalBox>
-    </Overlay>
-  );
+  handleOverlayClick = e => {
+    if (e.target === e.currentTarget) this.props.onClose();
+  };
+
+  render() {
+    return (
+      <Overlay onClick={this.handleOverlayClick}>
+        <ModalBox>
+          <ModalImg src={this.props.image} alt="Large preview" />
+        </ModalBox>
+      </Overlay>
+    );
+  }
 }
 
 export default Modal; 

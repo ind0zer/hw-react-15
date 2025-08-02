@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const Overlay = styled.div`
@@ -28,12 +28,14 @@ const Spinner = styled.div`
   animation: ${spin} 1s linear infinite;
 `;
 
-function Loader() {
-  return (
-    <Overlay>
-      <Spinner />
-    </Overlay>
-  );
+class Loader extends Component {
+  render() {
+    return (
+      <Overlay>
+        <Spinner />
+      </Overlay>
+    );
+  }
 }
 
 export default Loader; 

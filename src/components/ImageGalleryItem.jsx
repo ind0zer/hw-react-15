@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const GalleryItem = styled.li`
@@ -21,12 +21,14 @@ const GalleryImg = styled.img`
   display: block;
 `;
 
-function ImageGalleryItem({ webformatURL, largeImageURL, tags, onClick }) {
-  return (
-    <GalleryItem onClick={() => onClick(largeImageURL)}>
-      <GalleryImg src={webformatURL} alt={tags} />
-    </GalleryItem>
-  );
+class ImageGalleryItem extends Component {
+  render() {
+    return (
+      <GalleryItem onClick={() => this.props.onClick(this.props.largeImageURL)}>
+        <GalleryImg src={this.props.webformatURL} alt={this.props.tags} />
+      </GalleryItem>
+    );
+  }
 }
 
 export default ImageGalleryItem; 

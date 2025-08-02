@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const LoadMoreButton = styled.button`
@@ -24,12 +24,14 @@ const LoadMoreButton = styled.button`
   }
 `;
 
-function Button({ onClick }) {
-  return (
-    <LoadMoreButton type="button" onClick={onClick}>
-      Load more
-    </LoadMoreButton>
-  );
+class Button extends Component {
+  render() {
+    return (
+      <LoadMoreButton type="button" onClick={this.props.onClick}>
+        Load more
+      </LoadMoreButton>
+    );
+  }
 }
 
 export default Button; 

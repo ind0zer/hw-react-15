@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import ImageGalleryItem from './ImageGalleryItem';
 
@@ -15,20 +15,22 @@ const Gallery = styled.ul`
   margin-right: auto;
 `;
 
-function ImageGallery({ images, onImageClick }) {
-  return (
-    <Gallery>
-      {images.map(image => (
-        <ImageGalleryItem
-          key={image.id}
-          webformatURL={image.webformatURL}
-          largeImageURL={image.largeImageURL}
-          tags={image.tags}
-          onClick={onImageClick}
-        />
-      ))}
-    </Gallery>
-  );
+class ImageGallery extends Component {
+  render() {
+    return (
+      <Gallery>
+        {this.props.images.map(image => (
+          <ImageGalleryItem
+            key={image.id}
+            webformatURL={image.webformatURL}
+            largeImageURL={image.largeImageURL}
+            tags={image.tags}
+            onClick={this.props.onImageClick}
+          />
+        ))}
+      </Gallery>
+    );
+  }
 }
 
 export default ImageGallery; 
