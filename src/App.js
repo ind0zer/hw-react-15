@@ -19,7 +19,7 @@ class App extends Component {
     largeImageURL: ''
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevState) {
     if (prevState.query !== this.state.query || prevState.page !== this.state.page) {
       if (!this.state.query) return;
       this.fetchImages();
